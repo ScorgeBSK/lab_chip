@@ -12,55 +12,51 @@
 #include "simAVRHeader.h"
 #endif
 
-enum States {start, init, seq1, seq2, seq3, seq2R, waitRelease1, waitPush1, waitRelease2, waitPush2, waitRelease3, waitPush3, waitRelease2R, waitPush2R} state;
+enum States {start, init, waitInput, increment, decrement, reset, waitIncRelease, waitDecRelease, waitResetRelease} state;
 
 void tick(){
 	
-	unsigned char button = ~PINA & 0x01;
-	signed char led = PINB;
+	unsigned char button = PINA & 0x03;
+	signed char output = PINC;
 
 	switch(state){
 		case start:
 			state = init;
 			break;
 		case init:
-			state = button ? seq1 : init;
+			state = waitInput;
 			break;
-		case seq1:
-			state = waitRelease1;
+		case waitInput:
+			if(button == 1){
+				state = increment;
+			}
+			else if(button == 2){
+				state = decrement;
+			}
+			else if(button == 3){
+				state = reset;
+			}
+			else{
+				state = waitInput;
+			}
 			break;
-		case seq2:
-			state = waitRelease2;
+		case increment:
+			state = waitIncRelease;
 			break;
-		case seq3:
-			state = waitRelease3;
+		case decrement:
+			state = waitDecRelease;
 			break;
-		case seq2R:
-			state = waitRelease2R;
+		case reset:
+			state = waitResetRelease;
 			break;
-		case waitRelease1:
-			state = button ? waitRelease1 : waitPush1;
+		case waitIncRelease:
+			state = button ? waitIncRelease : waitInput;
 			break;
-		case waitPush1:
-			state = button ? seq2 : waitPush1;
+		case waitDecRelease:
+			state = button ? waitDecRelease : waitInput;
 			break;
-		case waitRelease2:
-                        state = button ? waitRelease2 : waitPush2;
-                        break;
-                case waitPush2:
-                        state = button ? seq3 : waitPush2;
-                        break;
-		case waitRelease3:
-                        state = button ? waitRelease3 : waitPush3;
-                        break;
-                case waitPush3:
-                        state = button ? seq2R : waitPush3;
-                        break;
-		case waitRelease2R:
-			state = button ? waitRelease2R : waitPush2R;
-			break;
-		case waitPush2R:
-			state = button ? seq1 : waitPush2R;
+		case waitResetRelease:
+			state = button ? waitResetRelease : waitInput;
 			break;
 		default:
 			state = start;
@@ -70,31 +66,42 @@ void tick(){
 
 	switch(state){
 		case init:
-			led = 0;
+			output = 7;
 			break;
-		case seq1:
-			led = 0x0C;
+		case waitInput:
 			break;
-		case seq2:
-			led = 0x12;	
+		case increment:
+			++output;
+			if(output > 9){
+				output = 9;
+			}	
 			break;
-		case seq3:
-			led = 0x21;
+		case decrement:
+			--output;
+			if(output < 0){
+				output = 0;
+			}
 			break;
-		case seq2R:
-			led = 0x12;
+		case reset:
+			output = 0;
+			break;
+		case waitIncRelease:
+			break;
+		case waitDecRelease:
+			break;
+		case waitResetRelease:
 			break;
 		default:
 			break;
 	}
 
-	PORTB = led;
+	PORTC = output;
 }
 
 int main(void) {
     /* Insert DDR and PORT initializations */
 	DDRA = 0x00; PORTA = 0xFF; 
-	DDRB = 0xFF; PORTB = 0x00;
+	DDRC = 0xFF; PORTC = 0x07;
     /* Insert your solution below */
 
 	state = start;

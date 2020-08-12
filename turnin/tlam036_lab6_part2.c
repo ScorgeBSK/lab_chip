@@ -16,7 +16,7 @@ enum States {start, init, waitInput, increment, decrement, reset, waitIncRelease
 
 void tick(){
 	
-	unsigned char button = ~PINA & 0x03;
+	unsigned char button = PINA & 0x03;
 	signed char output = PINC;
 
 	switch(state){
@@ -66,7 +66,7 @@ void tick(){
 
 	switch(state){
 		case init:
-			output = 0;
+			output = 7;
 			break;
 		case waitInput:
 			break;
@@ -101,7 +101,7 @@ void tick(){
 int main(void) {
     /* Insert DDR and PORT initializations */
 	DDRA = 0x00; PORTA = 0xFF; 
-	DDRC = 0xFF; PORTC = 0x00;
+	DDRC = 0xFF; PORTC = 0x07;
     /* Insert your solution below */
 
 	state = start;

@@ -17,55 +17,141 @@
 
 tests = [
        
-        {'description': 'PINA: 0x00 => PINB: 0x00',
+        {'description': 'PINA: 0x00 => PINC: 0x07',
         'steps': [ {'inputs': [('PINA', 0x00)], 'iterations': 3 } ],
-        'expected': [('PORTB', 0x00)],
+        'expected': [('PORTC', 0x07)],
         },
 
-        {'description': 'PINA: 0x01 => PINB: 0x0C',
-        'steps': [ {'inputs': [('PINA', 0x01)], 'iterations': 3 } ],
-        'expected': [('PORTB', 0x0C)],
+        {'description': 'PINA: 0x03 => PINC: 0x00',
+        'steps': [ {'inputs': [('PINA', 0x03)], 'iterations': 3 } ],
+        'expected': [('PORTC', 0x00)],
         },
-
-        {'description': 'PINA: 0x00 => PINB: 0x0C',
+        
+        {'description': 'PINA: 0x00 => PINC: 0x00',
         'steps': [ {'inputs': [('PINA', 0x00)], 'iterations': 3 } ],
-        'expected': [('PORTB', 0x0C)],
+        'expected': [('PORTC', 0x00)],
         },
 
-        {'description': 'PINA: 0x01 => PINB: 0x12',
-        'steps': [ {'inputs': [('PINA', 0x01)], 'iterations': 3 } ],
-        'expected': [('PORTB', 0x12)],
+        {'description': 'PINA: 0x02 => PINC: 0x00',
+        'steps': [ {'inputs': [('PINA', 0x02)], 'iterations': 3 } ],
+        'expected': [('PORTC', 0x00)],
         },
 
-        {'description': 'PINA: 0x00 => PINB: 0x12',
+        {'description': 'PINA: 0x00 => PINC: 0x00',
         'steps': [ {'inputs': [('PINA', 0x00)], 'iterations': 3 } ],
-        'expected': [('PORTB', 0x12)],
+        'expected': [('PORTC', 0x00)],
         },
 
-        {'description': 'PINA: 0x01 => PINB: 0x21',
+        {'description': 'PINA: 0x01 => PINC: 0x01',
         'steps': [ {'inputs': [('PINA', 0x01)], 'iterations': 3 } ],
-        'expected': [('PORTB', 0x21)],
+        'expected': [('PORTC', 0x01)],
         },
 
-        {'description': 'PINA: 0x00 => PINB: 0x21',
+        {'description': 'PINA: 0x00 => PINC: 0x01',
         'steps': [ {'inputs': [('PINA', 0x00)], 'iterations': 3 } ],
-        'expected': [('PORTB', 0x21)],
+        'expected': [('PORTC', 0x01)],
         },
 
-        {'description': 'PINA: 0x01 => PINB: 0x12',
+        {'description': 'PINA: 0x01 => PINC: 0x02',
         'steps': [ {'inputs': [('PINA', 0x01)], 'iterations': 3 } ],
-        'expected': [('PORTB', 0x12)],
+        'expected': [('PORTC', 0x02)],
         },
 
-        {'description': 'PINA: 0x00 => PINB: 0x12',
+        {'description': 'PINA: 0x00 => PINC: 0x02',
         'steps': [ {'inputs': [('PINA', 0x00)], 'iterations': 3 } ],
-        'expected': [('PORTB', 0x12)],
+        'expected': [('PORTC', 0x02)],
         },
 
-        {'description': 'PINA: 0x01 => PINB: 0x0C',
+        {'description': 'PINA: 0x01 => PINC: 0x03',
         'steps': [ {'inputs': [('PINA', 0x01)], 'iterations': 3 } ],
-        'expected': [('PORTB', 0x0C)],
+        'expected': [('PORTC', 0x03)],
         },
+
+        {'description': 'PINA: 0x00 => PINC: 0x03',
+        'steps': [ {'inputs': [('PINA', 0x00)], 'iterations': 3 } ],
+        'expected': [('PORTC', 0x03)],
+        },
+
+        {'description': 'PINA: 0x01 => PINC: 0x04',
+        'steps': [ {'inputs': [('PINA', 0x01)], 'iterations': 3 } ],
+        'expected': [('PORTC', 0x04)],
+        },
+
+        {'description': 'PINA: 0x00 => PINC: 0x04',
+        'steps': [ {'inputs': [('PINA', 0x00)], 'iterations': 3 } ],
+        'expected': [('PORTC', 0x04)],
+        },
+
+        {'description': 'PINA: 0x01 => PINC: 0x05',
+        'steps': [ {'inputs': [('PINA', 0x01)], 'iterations': 3 } ],
+        'expected': [('PORTC', 0x05)],
+        },
+
+        {'description': 'PINA: 0x00 => PINC: 0x05',
+        'steps': [ {'inputs': [('PINA', 0x00)], 'iterations': 3 } ],
+        'expected': [('PORTC', 0x05)],
+        },
+
+        {'description': 'PINA: 0x01 => PINC: 0x06',
+        'steps': [ {'inputs': [('PINA', 0x01)], 'iterations': 3 } ],
+        'expected': [('PORTC', 0x06)],
+        },
+
+        {'description': 'PINA: 0x00 => PINC: 0x06',
+        'steps': [ {'inputs': [('PINA', 0x00)], 'iterations': 3 } ],
+        'expected': [('PORTC', 0x06)],
+        },
+
+        {'description': 'PINA: 0x01 => PINC: 0x07',
+        'steps': [ {'inputs': [('PINA', 0x01)], 'iterations': 3 } ],
+        'expected': [('PORTC', 0x07)],
+        },
+
+        {'description': 'PINA: 0x00 => PINC: 0x07',
+        'steps': [ {'inputs': [('PINA', 0x00)], 'iterations': 3 } ],
+        'expected': [('PORTC', 0x07)],
+        },
+
+        {'description': 'PINA: 0x01 => PINC: 0x08',
+        'steps': [ {'inputs': [('PINA', 0x01)], 'iterations': 3 } ],
+        'expected': [('PORTC', 0x08)],
+        },
+
+        {'description': 'PINA: 0x00 => PINC: 0x08',
+        'steps': [ {'inputs': [('PINA', 0x00)], 'iterations': 3 } ],
+        'expected': [('PORTC', 0x08)],
+        },
+
+        {'description': 'PINA: 0x01 => PINC: 0x09',
+        'steps': [ {'inputs': [('PINA', 0x01)], 'iterations': 3 } ],
+        'expected': [('PORTC', 0x09)],
+        },
+
+        {'description': 'PINA: 0x00 => PINC: 0x09',
+        'steps': [ {'inputs': [('PINA', 0x00)], 'iterations': 3 } ],
+        'expected': [('PORTC', 0x09)],
+        },
+
+        {'description': 'PINA: 0x01 => PINC: 0x09',
+        'steps': [ {'inputs': [('PINA', 0x01)], 'iterations': 3 } ],
+        'expected': [('PORTC', 0x09)],
+        },
+
+        {'description': 'PINA: 0x00 => PINC: 0x09',
+        'steps': [ {'inputs': [('PINA', 0x00)], 'iterations': 3 } ],
+        'expected': [('PORTC', 0x09)],
+        },
+
+        {'description': 'PINA: 0x03 => PINC: 0x00',
+        'steps': [ {'inputs': [('PINA', 0x03)], 'iterations': 3 } ],
+        'expected': [('PORTC', 0x00)],
+        },
+
+        {'description': 'PINA: 0x00 => PINC: 0x00',
+        'steps': [ {'inputs': [('PINA', 0x00)], 'iterations': 3 } ],
+        'expected': [('PORTC', 0x00)],
+        },
+
 
     ]
 # Optionally you can add a set of "watch" variables these need to be global or static and may need
