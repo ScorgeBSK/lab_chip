@@ -16,7 +16,7 @@ enum States {start, init, waitInput, increment, decrement, reset, waitIncRelease
 
 void tick(){
 	
-	unsigned char button = PINA & 0x03;
+	unsigned char button = ~PINA & 0x03;
 	signed char output = PINC;
 
 	switch(state){
