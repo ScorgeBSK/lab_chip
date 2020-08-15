@@ -23,6 +23,7 @@ struct Task {
 
 unsigned char threeLEDs = 0x00;
 unsigned char blinkingLED = 0x00;
+unsigned char speakerOutput = 0x00;
 unsigned char combinedLED = 0x00;
 
 enum TL_States {threeLED_start, seq1, seq2, seq3} TL_state;
@@ -124,21 +125,63 @@ void CombineLEDTick(){
 		case combinedLED_start:
 			break;
 		case output:
-			combinedLED = (blinkingLED | threeLEDs);		
+			combinedLED = (speakerOutput | blinkingLED | threeLEDs);		
 			break;
 		default:
 			break;
 	}
 }
 
+enum S_States {speaker_start, speaker_init, speaker_off, speaker_on} S_state;
+int speakerTick(){
+
+	unsigned char button = ~PINA & 0x01;
+
+	switch(S_state){
+		case speaker_start:
+			S_state = init;
+			break;
+		case speaker_init:
+			S_state = button ? speaker_on : speaker_init;
+			break;
+		case speaker_off:
+			S_state = button ? speaker_on : speaker_off;
+			break;
+		case speaker_on:
+			S_state = button ? speaker_on : speaker_off;
+			break;
+		default:
+			S_state = speaker_start;
+			break;
+	}
+
+	switch(S_state){
+		case speaker_start:
+			break;
+		case speaker_init:
+			speakerOutput = 0x00;
+			break;
+		case speaker_off:
+			speakerOutput = 0x00;
+			break;
+		case speaker_on:
+			speakerOutput = 0x10;
+			break;
+		default:
+			break;
+	}
+
+	return S_state;
+}
 
 int main(void) {
 
     /* Insert DDR and PORT initializations */
+	DDRA = 0x00; PORTA = 0xFF;
 	DDRB = 0xFF; PORTB = 0x00;
     /* Insert your solution below */
 
-	const unsigned char SIZE = 2;
+	const unsigned char SIZE = 3;
 	struct Task tasks[SIZE];
 
 	tasks[0].state = threeLED_start;
@@ -151,7 +194,12 @@ int main(void) {
 	tasks[1].elapsedTime = tasks[1].period;
 	tasks[1].TickFct = &blinkLEDTick;
 
-	unsigned long PERIOD = 100;
+	tasks[2].state = speaker_start;
+	tasks[2].period = 2;
+	tasks[2].elapsedTime = tasks[2].period;
+	tasks[2].TickFct = &speakerTick;
+
+	unsigned long PERIOD = 2;
 	TimerSet(PERIOD);
 	TimerOn();
 	
